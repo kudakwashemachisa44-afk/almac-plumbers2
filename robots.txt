@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kudakwashemachisa44-afk.github.io/almac-plumbers2/sitemap.xml
