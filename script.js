@@ -8,6 +8,20 @@
         el.textContent = new Date().getFullYear();
     });
 
+    // Remote sample photos: fall back gracefully if one fails to load
+    function handleBroken(img) {
+        if (img.dataset.fallback && img.src.indexOf(img.dataset.fallback) === -1) {
+            img.src = img.dataset.fallback;
+            return;
+        }
+        var box = img.closest('.gallery-item, .s-media');
+        if (box) box.style.display = 'none';
+    }
+    document.querySelectorAll('img').forEach(function (img) {
+        if (img.complete && img.naturalWidth === 0 && img.getAttribute('loading') !== 'lazy') handleBroken(img);
+        img.addEventListener('error', function () { handleBroken(img); });
+    });
+
     // Sticky header shadow
     var header = document.querySelector('.site-header');
     if (header) {
